@@ -65,7 +65,21 @@ end
 function response.UserInfoRequest(data)
 	local args = pb_decode(data)
 	local userinfo = user_dc.req.get(args.uid)
+
+	for k, v in pairs (userinfo) do 
+		skynet.error(string.format("userinfo[%s]=[%s]", k, v))
+	end
+
 	send_client(data.fd, "user.UserInfoResponse", userinfo)
+
+	--testing
+
+	protobuf.encode()
+
+
+
+
+
 end
 
 function response.roleinit(uid)

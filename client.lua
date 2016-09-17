@@ -9,6 +9,7 @@ require "luaext"
 
 protobuf.register_file("protocol/netmsg.pb")
 protobuf.register_file("protocol/user.pb")
+protobuf.register_file("protocol/building.pb")
 
 local LOGIN_HOST = "127.0.0.1"
 local LOGIN_PORT = 5188
@@ -26,6 +27,19 @@ local USERNAME
 local UID
 
 local session = 0
+
+
+local function encode(name, data)
+	local payload = protobuf.encode(name, data)
+	local netmsg = { name = name, payload = payload }
+	local pack = protobuf.encode("netmsg.NetMsg", netmsg)
+	return pack
+end
+
+local function decode(data)
+	local netmsg = protobuf.decode("netmsg.NetMsg", data)
+	return netmsg
+end
 
 local function unpack_package(text)
 	local size = #text
@@ -87,9 +101,8 @@ local function send_request(v)
 end
 
 local function recv_response(v)
-	local size = #v - 5
-	local content, ok, sess = string.unpack("c"..tostring(size).."B>I4", v)
-	return ok ~=0 , content, sess
+	local data = decode(v)
+	return protobuf.decode(data.name, data.payload)
 end
 
 local CMD = {}
@@ -163,19 +176,6 @@ function CMD.login(token, sdkid, noclose)
 	print("handshake ok")
 end
 
-local function encode(name, data)
-	local payload = protobuf.encode(name, data)
-	local netmsg = { name = name, payload = payload }
-	local pack = protobuf.encode("netmsg.NetMsg", netmsg)
-	return pack
-end
-
-local function decode(data)
-	local netmsg = protobuf.decode("netmsg.NetMsg", data)
-
-	return netmsg
-end
-
 function CMD.roleinit(token, sdkid, name)
 	CMD.login(token, sdkid, true)
 
@@ -202,10 +202,21 @@ end
 
 function CMD.userinfo(token, sdkid)
 	CMD.login(token, sdkid, true)
+	local buildinginfo = recv_response(read_package())
+
+	for i,building in ipairs(buildinginfo.buildings) do
+		for k,v in pairs(building) do
+			print(string.format("building[%s][%s]=%s", i, k, v))
+		end		
+	end
 
 	send_request(encode("user.UserInfoRequest", {}))
-	local ok, msg, sess = recv_response(read_package())
-	msg = decode(msg)
+	local userinfo = recv_response(read_package())
+
+	for k,v in pairs(userinfo) do
+		print(string.format("userinfo[%s]=%s", k,v))
+	end
+	
 	if msg then
 		print("userinfo succ")
 	end

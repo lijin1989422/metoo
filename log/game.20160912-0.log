@@ -1,0 +1,18 @@
+[INFO] 2016-09-12 00:50:23 [gated] [./game/gated.lua:19] precreate 10 agents
+[INFO] 2016-09-12 00:52:42 [msgagent] [./game/msgagent.lua:99] 13 is login
+[INFO] 2016-09-12 00:52:42 [gated] [./game/gated.lua:33] notify agent uid=13 is real login
+[INFO] 2016-09-12 00:52:42 [msgagent] [./game/msgagent.lua:112] 13 is real login
+[INFO] 2016-09-12 00:52:42 [msgagent] [./game/msgagent.lua:113] call dcmgr to load user data uid=13
+[INFO] 2016-09-12 00:52:42 [user] [./game/user/user.lua:31] init_building ok, uid 13
+[INFO] 2016-09-12 00:52:50 [msgagent] [./game/msgagent.lua:99] 13 is login
+[INFO] 2016-09-12 00:52:50 [gated] [./game/gated.lua:33] notify agent uid=13 is real login
+[INFO] 2016-09-12 00:52:50 [msgagent] [./game/msgagent.lua:112] 13 is real login
+[INFO] 2016-09-12 00:52:50 [msgagent] [./game/msgagent.lua:113] call dcmgr to load user data uid=13
+[INFO] 2016-09-12 00:52:52 [msgagent] [./game/msgagent.lua:99] 13 is login
+[INFO] 2016-09-12 00:52:52 [gated] [./game/gated.lua:33] notify agent uid=13 is real login
+[INFO] 2016-09-12 00:52:52 [msgagent] [./game/msgagent.lua:112] 13 is real login
+[INFO] 2016-09-12 00:52:52 [msgagent] [./game/msgagent.lua:113] call dcmgr to load user data uid=13
+[INFO] 2016-09-12 00:52:55 [msgagent] [./game/msgagent.lua:99] 13 is login
+[INFO] 2016-09-12 00:52:55 [gated] [./game/gated.lua:33] notify agent uid=13 is real login
+[INFO] 2016-09-12 00:52:55 [msgagent] [./game/msgagent.lua:112] 13 is real login
+[INFO] 2016-09-12 00:52:55 [msgagent] [./game/msgagent.lua:113] call dcmgr to load user data uid=13

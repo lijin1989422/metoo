@@ -97,7 +97,11 @@ function send_client(fd, proto, data)
 		error("protobuf.encode error")
 	end
 
-	msg = msg .. string.pack(">BI4", 1, 9)
+	--msg = msg .. string.pack(">BI4", 1, 9)
+	skynet.error("### pack ".. proto .." string len=" .. #msg)
+
 	msg = string.pack(">s2", msg)
+
+	skynet.error("### send ".. proto .." string len=" .. #msg)
 	socketdriver.send(fd, msg)	
 end

@@ -27,7 +27,7 @@ $(LUA_CLIB_PATH)/protobuf.so : | $(LUA_CLIB_PATH)
 	cd lualib-src/pbc && $(MAKE) lib && cd binding/lua53 && $(MAKE) && cd ../../../.. && cp lualib-src/pbc/binding/lua53/protobuf.so $@
 
 $(LUA_CLIB_PATH)/log.so : lualib-src/lua-log.c | $(LUA_CLIB_PATH)
-	$(CC) $(CFLAGS) $(SHARED) $^ -o $@
+	$(CC) $(CFLAGS) $(SHARED) $^ -o $@ -I skynet/3rd/lua/
 
 clean :
 	cd skynet && $(MAKE) clean
